@@ -45,7 +45,7 @@ In order to use rekal:
 2) Zip the install directory into rekal.zip
 3) Place into the 'Binaries' folder
 
-In order to use autorunsc (which is saved in a .csv log):
+In order to use autorunsc (which saves the output to a .csv log):
 1) Download autorunsc
 2) Select the binary you wish to use (64 bit or 32 bit) and name it 'autorunsc.exe'
 3) Place it in a folder called 'Autorunsc'
