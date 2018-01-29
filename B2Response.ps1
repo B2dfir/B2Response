@@ -72,7 +72,7 @@ Function Help{
     users               Lists subfolders of C:\Users
     exec                Execute remote powershell command
     netstat             Execute netstat -an
-    dnscache            Execute dnscache
+    dnscache            Display dnscache
     prefetch            Get creation and modification timestamps (first and last execution times) of 
                         prefetch files within C:\Windows\Prefetch
     chromehistory       Parse Chrome browser history. Must specify username. E.g. chromehistory bobw.
