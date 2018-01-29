@@ -84,7 +84,7 @@ Function Help{
     autorunsc           Copy Binaries\Autorunsc.zip to C:\Windows\Temp on remote host, extract and run
                         autorunsc.exe -a * -user * -c
                         Saves results to Logs\autorunsc.csv
-    rekal*               Copy Binaries\rekal.zip to C:\Windows\Temp on remote host, extract, and run rekal.exe live
+    rekal*              BROKEN - Copy Binaries\rekal.zip to C:\Windows\Temp on remote host, extract, and run rekal.exe live
     exit       quit     Close PSSession and exit B2Response
 
 *Not logged due to technical limitations
@@ -265,7 +265,7 @@ While (1 -eq 1) {
             Invoke-Command -Session $s1 -ScriptBlock {[io.compression.zipfile]::ExtractToDirectory("C:\Windows\Temp\rekal.zip", "C:\Windows\Temp")}
         }
         If (Test-Path \\$RemoteHost\C$\Windows\Temp\Rekall\rekal.exe) {
-            cmd /c start powershell -NoExit -Command{Enter-PSSession -ComputerName vc-its-003-w;C:\Windows\Temp\Rekall\rekal.exe live;}
+            cmd /c start powershell -NoExit -Command{Enter-PSSession -Session $s1;C:\Windows\Temp\Rekall\rekal.exe live;}
         }
     }
     If ($Command -eq "exit" -or $Command -eq "quit"){
