@@ -33,9 +33,8 @@ Logged PS Remote Command Wrapper for simplified Blue Team Forensics/IR
                         Saves results to Logs\autorunsc.csv
     rekal*               Copy Binaries\rekal.zip to C:\Windows\Temp on remote host, extract, and run rekal.exe live
     exit       quit     Close PSSession and exit B2Response
-
-*Not logged due to technical limitations
-
+    
+    *Not logged due to technical limitations
 -----------------------------------------------------------------------------------------------------------------------------
 
 Usage:
