@@ -19,7 +19,7 @@ Logged PS Remote Command Wrapper for simplified Blue Team Forensics/IR
     users               Lists subfolders of C:\Users
     exec                Execute remote powershell command
     netstat             Execute netstat -an
-    dnscache            Execute dnscache
+    dnscache            Display dnscache
     prefetch            Get creation and modification timestamps (first and last execution times) of 
                         prefetch files within C:\Windows\Prefetch
     chromehistory       Parse Chrome browser history. Must specify username. E.g. chromehistory bobw.
@@ -31,10 +31,11 @@ Logged PS Remote Command Wrapper for simplified Blue Team Forensics/IR
     autorunsc           Copy Binaries\Autorunsc.zip to C:\Windows\Temp on remote host, extract and run
                         autorunsc.exe -a * -user * -c
                         Saves results to Logs\autorunsc.csv
-    rekal*               Copy Binaries\rekal.zip to C:\Windows\Temp on remote host, extract, and run rekal.exe live
+    rekal*^             Copy Binaries\rekal.zip to C:\Windows\Temp on remote host, extract, and run rekal.exe live
     exit       quit     Close PSSession and exit B2Response
     
     *Not logged due to technical limitations
+    ^Requires .\Binaries\PsExec.exe
 -----------------------------------------------------------------------------------------------------------------------------
 
 Usage:
