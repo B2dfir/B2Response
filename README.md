@@ -32,8 +32,8 @@ Logged PS Remote Command Wrapper for simplified Blue Team Forensics/IR
                                  Custom syntax: sigcheck C:\Path Entropy
                                  E.g. sigcheck C:\Windows\Temp\B2R 7
     lastactivityview   lav       Copies Binaries\LastActivityView.exe to remote host and retrieves csv output file
-    rekal*^                      Copy Binaries\rekal.zip to C:\Windows\Temp\B2R on remote host, extract, and run rekal.exe live
-    exit                quit     Close PSSession and exit B2Response    
+    rekal*^                      Copy Binaries\rekal.zip to C:\Windows\Temp\B2R on remote host, extract, and run rekal.exe live
+    exit               quit     Close PSSession and exit B2Response    
     
     *Not logged due to technical limitations
     ^Requires .\Binaries\PsExec.exe 
