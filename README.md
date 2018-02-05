@@ -10,6 +10,7 @@ Logged PS Remote Command Wrapper for simplified Blue Team Forensics/IR
     dir                 ls       List current directory contents
     cd                           Change current directory
     mkdir                        Create directory
+    pslist              ps       List running processes
     upload                       Uploads a file to remote host. Must use absolute paths and must wrap in double quotes
                                  Syntax: 
                                  upload "C:\local\host\test.txt" "C:\remote\host\test.txt"
@@ -31,7 +32,7 @@ Logged PS Remote Command Wrapper for simplified Blue Team Forensics/IR
                                  Default execution runs against C:\Windows\System32 with entropy 7+
                                  Custom syntax: sigcheck C:\Path Entropy
                                  E.g. sigcheck C:\Windows\Temp\B2R 7
-    lastactivityview   lav       Copies Binaries\LastActivityView.exe to remote host and retrieves csv output file
+    lastactivityview^   lav       Copies Binaries\LastActivityView.exe to remote host and retrieves csv output file
     rekal*^                      Copy Binaries\rekal.zip to C:\Windows\Temp\B2R on remote host, extract, and run rekal.exe live
     exit               quit     Close PSSession and exit B2Response    
     
