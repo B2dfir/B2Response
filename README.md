@@ -48,7 +48,7 @@ B2Response.ps1 -ComputerName remotehost
 B2Response will automatically create a time/hostname stamped logging subdirectory where executed, and will log the output from all commands executed, except Rekal.
 
 ## Cleanup
-Simply enter the command 'cleanup' in the B2Response shell.
+Simply enter the command 'cleanup' in the B2Response shell to delete C:\Windows\Temp\B2R recursively on the remote host.
 
 ## Dependencies
 ### Rekal:
