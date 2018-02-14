@@ -1,5 +1,5 @@
 # B2Response (beta)
-Logged PS Remote Command Wrapper for simplified Blue Team Forensics/IR
+Logged PS Remote Command Wrapper for simplified Blue Team Forensics/IR.
 
 -----------------------------------------------------------------------------------------------------------------------------
          Available commands:
@@ -41,17 +41,32 @@ Logged PS Remote Command Wrapper for simplified Blue Team Forensics/IR
 
 -----------------------------------------------------------------------------------------------------------------------------
 
-Usage:
-B2Response.ps1 remotehost
+##Usage
+B2Response.ps1 -ComputerName remotehost
 
-In order to use rekal:
+##Logging
+B2Response will automatically create a logging subdirectory where executed, and will log the output from all commands executed, except Rekal.
+
+##Cleanup
+Simply enter the command 'cleanup' in the B2Response shell.
+
+##Dependencies
+###In order to use rekal:
 1) Download and install rekal on your PC
 2) Zip the install directory into rekal.zip
 3) Place into the 'Binaries' folder
 
-In order to use autorunsc, browsinghistoryview, lastactivityview or sigcheck:
-1) Download program
-2) Select the binary you wish to use (64 bit or 32 bit) and name it 'autorunsc.exe'/'browsinghistoryview.exe'/'sigcheck.exe'/'lastactivityview.exe'
-3) Place it in the 'Binaries' folder
+###In order to use other binaries:
+1) Download exe
+BrowsingHistoryView: https://www.nirsoft.net/utils/browsing_history_view.html
+Autorunsc: https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
+LastAvtivityView: https://www.nirsoft.net/utils/computer_activity_view.html
+SigCheck: https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck
+2) Select the binary you wish to use (64 bit or 32 bit) and name it 
+'browsinghistoryview.exe'
+'autorunsc.exe'
+'lastactivityview.exe'
+'sigcheck.exe'
+3) Place in the 'Binaries' folder
 
 
