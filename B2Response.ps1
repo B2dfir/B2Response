@@ -48,7 +48,7 @@ catch{
 
 #Create temporary folder on remote host for binary and file transfer
 try{
-    If (-NOT(Test-Path \\$computerName\C$\Windows\Temp\B2R)){
+    If (-NOT(Invoke-Command -Session $s1 -ScriptBlock {Test-Path \\$computerName\C$\Windows\Temp\B2R})){
         Write-Host "Creating temporary directory \\$computerName\C$\Windows\Temp\B2R"
         New-Item -Path "\\$computerName\C$\Windows\Temp\B2R" -ItemType directory >$null 2>&1
     }
@@ -190,16 +190,16 @@ While (1 -eq 1) {
         Invoke-Command -Session $s1 -ScriptBlock {Get-ChildItem C:\Windows\Prefetch -recurse -include @('*.pf')|Select-Object Name, CreationTime, LastWriteTime} | sort LastWriteTime -Descending | ft -autosize | Tee-Object -file "$Logs\prefetch.txt"
     }
     If ($Command -eq "autorunsc"){
-        If (-Not(Test-Path \\$computerName\C$\Windows\Temp\B2R\autorunsc.exe)){
+        If (-Not(Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\autorunsc.exe})){
             try{
                 Write-Host "Attempting to copy binary to \\$computerName\C$\Windows\Temp\B2R\"
-                Copy-Item -Path Binaries\autorunsc.exe -Destination C:\Windows\Temp\B2R\autorunsc.exe -ToSession $s1 -ErrorAction Stop
+                Copy-Item -Path .\Binaries\autorunsc.exe -Destination C:\Windows\Temp\B2R\autorunsc.exe -ToSession $s1 -ErrorAction Stop
             }
             catch{
                 $_.Exception.Message
             }
         }
-        If (Test-Path \\$computerName\C$\Windows\Temp\B2R\autorunsc.exe){
+        If (Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\autorunsc.exe}){
             Write-Host "Copy successful. Executing..."
             try{
                 Invoke-Command -Session $s1 -ScriptBlock {C:\Windows\Temp\B2R\autorunsc.exe -a * -user * -c -accepteula;} | Tee-Object -file "$Logs\autoruns.csv" -Append
@@ -222,7 +222,7 @@ While (1 -eq 1) {
                 $SigPath = $SigPath + "*"
             }
         }
-        If (-Not(Test-Path \\$computerName\C$\Windows\Temp\B2R\sigcheck.exe)){
+        If (-Not(Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\sigcheck.exe})){
             try{
                 Write-Host "Attempting to copy binary to \\$computerName\C$\Windows\Temp\B2R\"
                 Copy-Item -Path Binaries\sigcheck.exe -Destination C:\Windows\Temp\B2R\sigcheck.exe -ToSession $s1 -ErrorAction Stop
@@ -231,7 +231,7 @@ While (1 -eq 1) {
                 $_.Exception.Message
             }
         }
-        If (Test-Path \\$computerName\C$\Windows\Temp\B2R\sigcheck.exe) {
+        If (Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\sigcheck.exe}) {
             Write-Host "Copy successful. Executing... No output will be shown until an entropy match is found, so output may stay blank for a time"
             try{
                 Invoke-Command -Session $s1 -ScriptBlock {param($SigPath,$SigEntropy) ForEach ($file in Get-ChildItem -Path $SigPath -Include *.cpl,*.exe,*.dll,*.ocx,*.sys,*.scr){$a=C:\Windows\Temp\B2R\sigcheck.exe -accepteula -a -e -c $file.Fullname | select -Skip 4 | ConvertFrom-Csv;if($a.Entropy -gt $SigEntropy){$a | select path,verified,publisher,entropy}}} -ArgumentList ($SigPath, $SigEntropy) | Tee-Object -file "$Logs\sigcheck.txt" -Append 
@@ -242,7 +242,7 @@ While (1 -eq 1) {
         }
     }
     If ($Command -eq "lastactivityview" -or $Command -eq "lav"){
-        If (-Not(Test-Path \\$computerName\C$\Windows\Temp\B2R\LastActivityView.exe)){
+        If (-Not(Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\LastActivityView.exe})){
             try{
                 Write-Host "Attempting to copy binary to \\$computerName\C$\Windows\Temp\B2R\"
                 Copy-Item -Path Binaries\LastActivityView.exe -Destination C:\Windows\Temp\B2R\LastActivityView.exe -ToSession $s1 -ErrorAction Stop
@@ -254,11 +254,11 @@ While (1 -eq 1) {
 		If (-Not(Test-Path .\Binaries\PsExec.exe)){
 			Write-Host "Missing binary ./Binaries/PsExec.exe"
 		}
-        If ((Test-Path \\$computerName\C$\Windows\Temp\B2R\LastActivityView.exe) -and (Test-Path .\Binaries\PsExec.exe)) {
+        If ((Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\LastActivityView.exe}) -and (Test-Path .\Binaries\PsExec.exe)) {
             Write-Host "Copy Successful. Executing..."
-            .\Binaries\PsExec.exe -accepteula \\$computerName LastActivityView.exe /scomma C:\Windows\Temp\B2R\lastactivityview.csv
+            .\Binaries\PsExec.exe -accepteula \\$computerName C:\Windows\Temp\B2R\LastActivityView.exe /scomma C:\Windows\Temp\B2R\lastactivityview.csv
         }
-        If (Test-Path \\$computerName\C$\Windows\Temp\B2R\lastactivityview.csv){
+        If (Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\lastactivityview.csv}){
             Copy-Item -Path C:\Windows\Temp\B2R\lastactivityview.csv -Destination $Logs\lastactivityview.csv -FromSession $s1
         }
         If (Test-Path $Logs\lastactivityview.csv){
@@ -269,7 +269,7 @@ While (1 -eq 1) {
         }
     }
     If ($Command -eq "browsinghistoryview" -or $Command -eq "bhv"){
-        If (-Not(Test-Path \\$computerName\C$\Windows\Temp\B2R\BrowsingHistoryView.exe)){
+        If (-Not(Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\BrowsingHistoryView.exe})){
             try{
                 Write-Host "Attempting to copy binary to \\$computerName\C$\Windows\Temp\B2R\"
                 Copy-Item -Path .\Binaries\BrowsingHistoryView.exe -Destination C:\Windows\Temp\B2R\BrowsingHistoryView.exe -ToSession $s1 -ErrorAction Stop
@@ -281,11 +281,11 @@ While (1 -eq 1) {
 		If (-Not(Test-Path .\Binaries\PsExec.exe)){
 			Write-Host "Missing binary ./Binaries/PsExec.exe"
 		}
-        If ((Test-Path \\$computerName\C$\Windows\Temp\B2R\BrowsingHistoryView.exe) -and (Test-Path .\Binaries\PsExec.exe)) {
+        If ((Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\BrowsingHistoryView.exe}) -and (Test-Path .\Binaries\PsExec.exe)) {
             Write-Host "Copy Successful. Executing..."
             .\Binaries\PsExec.exe -accepteula \\$computerName C:\Windows\Temp\B2R\BrowsingHistoryView.exe /HistorySource 1 /scomma C:\Windows\Temp\B2R\browsinghistoryview.csv
         }
-        If (Test-Path \\$computerName\C$\Windows\Temp\B2R\browsinghistoryview.csv){
+        If (Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\browsinghistoryview.csv}){
             Copy-Item -Path C:\Windows\Temp\B2R\browsinghistoryview.csv -Destination $Logs\browsinghistoryview.csv -FromSession $s1
         }
         If (Test-Path $Logs\browsinghistoryview.csv){
@@ -296,7 +296,7 @@ While (1 -eq 1) {
         }
     }
     If ($Command -eq "rekal"){
-        If (-Not(Test-Path \\$computerName\C$\Windows\Temp\B2R\rekal.zip)){
+        If (-Not(Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\rekal.zip})){
             try{
                 Write-Host "Attempting to copy zip to \\$computerName\C$\Windows\Temp\B2R\"
                 Copy-Item -Path Binaries\rekal.zip -Destination C:\Windows\Temp\B2R\rekal.zip -ToSession $s1  | Out-Null
@@ -305,7 +305,7 @@ While (1 -eq 1) {
                 $_.Exception.Message
             }
         }
-        If (-Not(Test-Path \\$computerName\C$\Windows\Temp\B2R\Rekall) -and (Test-Path \\$computerName\C$\Windows\Temp\B2R\rekal.zip)){
+        If (-Not(Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\Rekall}) -and (Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\rekal.zip})){
             Write-Host "Copy successful. Extracting rekal.zip..."
             Invoke-Command -Session $s1 -ScriptBlock {Add-Type -assembly "system.io.compression.filesystem"}
             Invoke-Command -Session $s1 -ScriptBlock {[io.compression.zipfile]::ExtractToDirectory("C:\Windows\Temp\B2R\rekal.zip", "C:\Windows\Temp\B2R")}
@@ -313,21 +313,21 @@ While (1 -eq 1) {
 		If (-Not(Test-Path .\Binaries\PsExec.exe)){
 			Write-Host "Missing binary ./Binaries/PsExec.exe"
 		}
-        If ((Test-Path \\$computerName\C$\Windows\Temp\B2R\Rekall\rekal.exe) -and (Test-Path .\Binaries\PsExec.exe)) {
+        If ((Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\Rekall\rekal.exe}) -and (Test-Path .\Binaries\PsExec.exe)) {
             .\Binaries\PsExec.exe -accepteula \\$computerName -s C:\Windows\Temp\B2R\Rekall\rekal.exe live
         }
     }
-    If (($Command -eq "cleanup") -and (Test-Path \\$computerName\C$\Windows\Temp\B2R\)){
+    If (($Command -eq "cleanup") -and (Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\})){
         try{
             Invoke-Command -Session $s1 -ScriptBlock {Remove-Item -Path 'C:\Windows\Temp\B2R\' -recurse -force} 
         }
         catch{
             $_.Exception.Message
         }
-        if (Test-Path \\$computerName\C$\Windows\Temp\B2R){
+        if (Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R}){
             Write-Host "'\\$computerName\C$\Windows\Temp\B2R' deletion failed" | Tee-Object -file "$Logs\cleanup.txt" -Append
         }
-        elseif (-Not(Test-Path \\$computerName\C$\Windows\Temp\B2R)){
+        elseif (-Not(Invoke-Command -Session $s1 -ScriptBlock {Test-Path \\$computerName\C$\Windows\Temp\B2R})){
             Write-Host "'\\$computerName\C$\Windows\Temp\B2R' deleted successfully!" | Tee-Object -file "$Logs\cleanup.txt" -Append
         }
     }
@@ -339,3 +339,4 @@ While (1 -eq 1) {
         }
     } 
  
+
