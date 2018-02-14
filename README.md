@@ -1,8 +1,8 @@
 # B2Response (beta)
 Logged PS Remote Command Wrapper for simplified Blue Team Forensics/IR.
 
+Available commands:
 -----------------------------------------------------------------------------------------------------------------------------
-         Available commands:
 
     Command             Alias    Description
     -------             -----    -----------
@@ -41,22 +41,23 @@ Logged PS Remote Command Wrapper for simplified Blue Team Forensics/IR.
 
 -----------------------------------------------------------------------------------------------------------------------------
 
-##Usage
+## Usage
 B2Response.ps1 -ComputerName remotehost
 
-##Logging
-B2Response will automatically create a logging subdirectory where executed, and will log the output from all commands executed, except Rekal.
+## Logging
+B2Response will automatically create a time/hostname stamped logging subdirectory where executed, and will log the output from all commands executed, except Rekal.
 
-##Cleanup
+## Cleanup
 Simply enter the command 'cleanup' in the B2Response shell.
 
-##Dependencies
-###In order to use rekal:
+## Dependencies
+### Rekal:
 1) Download and install rekal on your PC
+http://www.rekall-forensic.com/
 2) Zip the install directory into rekal.zip
 3) Place into the 'Binaries' folder
 
-###In order to use other binaries:
+### Other Binaries:
 1) Download exe
 BrowsingHistoryView: https://www.nirsoft.net/utils/browsing_history_view.html
 Autorunsc: https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
