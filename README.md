@@ -52,22 +52,22 @@ Simply enter the command 'cleanup' in the B2Response shell to delete C:\Windows\
 
 ## Dependencies
 ### Rekal:
-1) Download and install rekal on your PC
+1) Download and install rekal on your PC  
 http://www.rekall-forensic.com/
 2) Zip the install directory into rekal.zip
 3) Place into the 'Binaries' folder
 
 ### Other Binaries:
-1) Download exe
-BrowsingHistoryView: https://www.nirsoft.net/utils/browsing_history_view.html
-Autorunsc: https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
-LastAvtivityView: https://www.nirsoft.net/utils/computer_activity_view.html
-SigCheck: https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck
-2) Select the binary you wish to use (64 bit or 32 bit) and name it 
-'browsinghistoryview.exe'
-'autorunsc.exe'
-'lastactivityview.exe'
-'sigcheck.exe'
+1) Download exe  
+BrowsingHistoryView: https://www.nirsoft.net/utils/browsing_history_view.html  
+Autorunsc: https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns  
+LastAvtivityView: https://www.nirsoft.net/utils/computer_activity_view.html  
+SigCheck: https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck  
+2) Select the binary you wish to use (64 bit or 32 bit) and name it   
+'browsinghistoryview.exe'  
+'autorunsc.exe'  
+'lastactivityview.exe'  
+'sigcheck.exe'  
 3) Place in the 'Binaries' folder
 
 
