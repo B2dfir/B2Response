@@ -8,7 +8,7 @@
 .OUTPUTS
   Logs are stored in a date/time stamped folder within the executed directory
 .NOTES
-  Version:        0.1
+  Version:        0.2
   Author:         Barnaby Skeggs
   Creation Date:  28 Jan 2018
   Purpose/Change: Initial script development
