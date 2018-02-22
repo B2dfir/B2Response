@@ -70,4 +70,8 @@ SigCheck: https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck
 'sigcheck.exe'  
 3) Place in the 'Binaries' folder
 
-
+### Planned feature additions:
+Memory dump
+Packet capture
+Utilization of a network share for binary execution and file write (without breaking powershell 2nd hop rule)
+Additional parsers
