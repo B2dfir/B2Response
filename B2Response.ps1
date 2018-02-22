@@ -256,7 +256,7 @@ While (1 -eq 1) {
 		}
         If ((Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\LastActivityView.exe}) -and (Test-Path .\Binaries\PsExec.exe)) {
             Write-Host "Copy Successful. Executing..."
-            .\Binaries\PsExec.exe -accepteula \\$computerName C:\Windows\Temp\B2R\LastActivityView.exe /scomma C:\Windows\Temp\B2R\lastactivityview.csv
+            .\Binaries\PsExec.exe -s -accepteula \\$computerName C:\Windows\Temp\B2R\LastActivityView.exe /scomma C:\Windows\Temp\B2R\lastactivityview.csv
         }
         If (Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\lastactivityview.csv}){
             Copy-Item -Path C:\Windows\Temp\B2R\lastactivityview.csv -Destination $Logs\lastactivityview.csv -FromSession $s1
@@ -283,7 +283,7 @@ While (1 -eq 1) {
 		}
         If ((Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\BrowsingHistoryView.exe}) -and (Test-Path .\Binaries\PsExec.exe)) {
             Write-Host "Copy Successful. Executing..."
-            .\Binaries\PsExec.exe -accepteula \\$computerName C:\Windows\Temp\B2R\BrowsingHistoryView.exe /HistorySource 1 /scomma C:\Windows\Temp\B2R\browsinghistoryview.csv
+            .\Binaries\PsExec.exe -s -accepteula \\$computerName C:\Windows\Temp\B2R\BrowsingHistoryView.exe /HistorySource 1 /scomma C:\Windows\Temp\B2R\browsinghistoryview.csv
         }
         If (Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\browsinghistoryview.csv}){
             Copy-Item -Path C:\Windows\Temp\B2R\browsinghistoryview.csv -Destination $Logs\browsinghistoryview.csv -FromSession $s1
@@ -314,7 +314,7 @@ While (1 -eq 1) {
 			Write-Host "Missing binary ./Binaries/PsExec.exe"
 		}
         If ((Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\Rekall\rekal.exe}) -and (Test-Path .\Binaries\PsExec.exe)) {
-            .\Binaries\PsExec.exe -accepteula \\$computerName -s C:\Windows\Temp\B2R\Rekall\rekal.exe live
+            .\Binaries\PsExec.exe -s -accepteula \\$computerName -s C:\Windows\Temp\B2R\Rekall\rekal.exe live
         }
     }
     If (($Command -eq "cleanup") -and (Invoke-Command -Session $s1 -ScriptBlock {Test-Path C:\Windows\Temp\B2R\})){
