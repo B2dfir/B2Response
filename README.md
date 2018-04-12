@@ -71,7 +71,8 @@ SigCheck: https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck
 3) Place in the 'Binaries' folder
 
 ### Known Issues:
-Sometimes the Tee-Object only outputs to file, and not stdout. Not sure yet why this occurs.
+Sometimes the Tee-Object only outputs to file, and not stdout. Not sure why this occurs.
+Tee-Object doesn't output for rawcopy result confirmation. Nut sure why this occurs.
 
 ### Future feature additions:
 Memory dump  
