@@ -70,6 +70,9 @@ SigCheck: https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck
 'sigcheck.exe'  
 3) Place in the 'Binaries' folder
 
+### Known Issues:
+Sometimes the Tee-Object only outputs to file, and not stdout. Not sure yet why this occurs.
+
 ### Future feature additions:
 Memory dump  
 Packet capture  
