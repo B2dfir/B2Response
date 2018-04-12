@@ -1,4 +1,4 @@
-# B2Response (beta)
+# B2Response
 Logged PS Remote Command Wrapper for simplified Blue Team Forensics/IR.
 
 Available commands:
